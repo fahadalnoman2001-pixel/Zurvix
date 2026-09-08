@@ -1,5 +1,8 @@
 export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_ADMIN_API_URL || 'http://localhost:8000';
+  process.env.NEXT_PUBLIC_ADMIN_API_URL ||
+  (process.env.NODE_ENV === 'production'
+    ? 'https://admin.zurvix.com'
+    : 'http://localhost:8000');
 
 export interface ContactPayload {
   name: string;
