@@ -12,30 +12,112 @@ export interface PricingPackage {
   ctaText?: string;
 }
 
-export const websitePackages: PricingPackage[] = [
+// ── 4 Core Tiers (Ordered Left-to-Right Ascending by Investment) ──
+export const coreTiers: PricingPackage[] = [
   {
-    id: 'business-website',
+    id: 'starter-website',
     category: 'website',
-    title: 'Business Website',
+    title: 'STARTER — Website Only',
     price: '€300',
     billingPeriod: 'starting from',
     description: 'Perfect for small businesses, local services, and consultants looking for a credible, high-converting digital presence.',
     features: [
-      'Free Domain & Hosting Setup',
-      'Professional Custom Website',
-      '100% Mobile Responsive Design',
-      'Lead Generation & Contact Forms',
+      'Single Custom Website (Up to ~5 Pages)',
+      '100% Mobile-Responsive Design',
       'Basic On-Page SEO Setup',
-      'Business-Focused Conversion Layout',
+      'Lead Generation & Contact Form',
+      'Free Domain & Cloud Hosting (Year 1)',
+      '1 Round of Design Revisions',
       'Social Media & WhatsApp Integration',
       'Fast Turnaround & Launch Support'
     ],
-    whatsAppMessage: "Hello ZURVIX, I'm interested in the Business Website package starting from €300. I'd like to discuss my project."
+    whatsAppMessage: "Hello ZURVIX, I'm interested in the STARTER Website package starting from €300. I'd like to discuss my project."
+  },
+  {
+    id: 'ecommerce-website',
+    category: 'website',
+    title: 'ECOMMERCE — Online Store',
+    price: '€600',
+    billingPeriod: 'starting from',
+    description: 'Turn visitors into paying customers with a scalable, secure, and intuitive digital storefront.',
+    features: [
+      'Custom Shopify, WooCommerce or Laravel Store',
+      'Product Catalog Structure (Up to ~30 SKUs)',
+      'Secure Payment Gateways (Stripe, PayPal, etc.)',
+      'Mobile-Optimized Checkout Flow',
+      'Smart Admin Product & Order Management',
+      'Basic SEO + GEO Kickoff for Product Pages',
+      'Discount Codes & Coupon Engine',
+      'Free Domain & High-Speed Cloud Hosting'
+    ],
+    whatsAppMessage: "Hello ZURVIX, I am interested in the ECOMMERCE Store package starting from €600. I would like to discuss my project."
+  },
+  {
+    id: 'elite-01',
+    category: 'elite',
+    title: 'ELITE 01 — Website + Mobile App',
+    price: '€800',
+    billingPeriod: 'starting from',
+    description: 'Complete digital ecosystem uniting a bespoke high-performance web platform and cross-platform mobile apps.',
+    features: [
+      'Custom Web Platform / Modern Website',
+      'Cross-Platform Mobile App (iOS & Android via Flutter)',
+      'Unified Master Admin Control Panel',
+      'Free Domain & Enterprise Cloud Hosting',
+      'Custom UI/UX Design System Across All Screens',
+      'Single Synchronized Database & APIs',
+      'Standard Launch & Store Submission Assistance',
+      'Lead Generation & Direct Inquiry Flow'
+    ],
+    whatsAppMessage: "Hello ZURVIX, I am interested in the ELITE 01 (Website + Mobile App) package starting from €800. I would like to discuss my project."
+  },
+  {
+    id: 'elite-02',
+    category: 'elite',
+    title: 'ELITE 02 — Web + App + Growth',
+    price: '€1,000',
+    billingPeriod: 'starting from',
+    popular: true,
+    badge: '⭐ MOST POPULAR BUNDLE',
+    description: 'Our most comprehensive transformation bundle: Custom Web, iOS & Android Apps via Flutter, plus full digital marketing & AI search kickoff.',
+    features: [
+      'Custom High-Performance Web Application',
+      'Cross-Platform Mobile App (iOS & Android via Flutter)',
+      'Unified Super Admin Management Panel',
+      'Free Domain & Scalable Cloud Hosting Setup',
+      'Complete Digital Marketing Campaign Launch',
+      'Meta Pixel & Conversion API Architecture',
+      'Full On-Page SEO + GEO + LLM Optimization Kickoff',
+      'VIP Priority Support & Launch Strategy Session'
+    ],
+    whatsAppMessage: "Hello ZURVIX, I am interested in the ELITE 02 (Web + App + Growth) package starting from €1,000. I would like to discuss my project."
+  }
+];
+
+export const websitePackages: PricingPackage[] = [
+  {
+    id: 'business-website',
+    category: 'website',
+    title: 'STARTER — Business Website',
+    price: '€300',
+    billingPeriod: 'starting from',
+    description: 'Perfect for small businesses, local services, and consultants looking for a credible, high-converting digital presence.',
+    features: [
+      'Single Custom Website (Up to ~5 Pages)',
+      '100% Mobile Responsive Design',
+      'Lead Generation & Contact Forms',
+      'Basic On-Page SEO Setup',
+      'Free Domain & Hosting (Year 1 Included)',
+      '1 Round of Revisions',
+      'Social Media & WhatsApp Integration',
+      'Fast Turnaround & Launch Support'
+    ],
+    whatsAppMessage: "Hello ZURVIX, I'm interested in the STARTER Business Website package starting from €300. I'd like to discuss my project."
   },
   {
     id: 'custom-website',
     category: 'website',
-    title: 'Custom Website',
+    title: 'Custom Website & Web App',
     price: '€350',
     billingPeriod: 'starting from',
     popular: true,
@@ -56,21 +138,21 @@ export const websitePackages: PricingPackage[] = [
   {
     id: 'ecommerce-website',
     category: 'website',
-    title: 'Ecommerce Website',
-    price: '€500',
+    title: 'Ecommerce Store',
+    price: '€600',
     billingPeriod: 'starting from',
     description: 'Turn visitors into paying customers with a scalable, secure, and intuitive digital storefront.',
     features: [
-      'Domain & High-Speed Cloud Hosting',
-      'Full Ecommerce Architecture & Catalog',
+      'Custom Shopify, WooCommerce or Laravel Store',
+      'Full Ecommerce Architecture & Product Catalog',
       'Smart Admin Control Panel',
-      'Product & Inventory Management',
+      'Product & Inventory Management (Up to 30 SKUs)',
       'Order Tracking & Customer Portal',
       'Secure Payment Gateway (Stripe, PayPal, etc.)',
       'Discount Codes & Coupon Engine',
-      'Cart Abandonment & Conversion Tools'
+      'Basic SEO + GEO Kickoff for Product Pages'
     ],
-    whatsAppMessage: "Hello ZURVIX, I am interested in the Ecommerce Website package starting from €500. I would like to discuss my project."
+    whatsAppMessage: "Hello ZURVIX, I am interested in the Ecommerce Store package starting from €600. I would like to discuss my project."
   }
 ];
 
@@ -78,12 +160,12 @@ export const appPackages: PricingPackage[] = [
   {
     id: 'ecommerce-app',
     category: 'app',
-    title: 'Ecommerce App',
+    title: 'Ecommerce Mobile App',
     price: '€500',
     billingPeriod: 'starting from',
-    description: 'Native mobile shopping app for Android and iOS that drives repeated purchases and customer loyalty.',
+    description: 'Cross-platform mobile shopping app for Android and iOS that drives repeat purchases and customer loyalty.',
     features: [
-      'Android + iOS Native Compatibility',
+      'Cross-Platform Native (iOS & Android via Flutter)',
       'Complete Ecommerce Cart & Checkout',
       'Smart Unified Admin Panel',
       'Product & Category Management',
@@ -102,9 +184,9 @@ export const appPackages: PricingPackage[] = [
     billingPeriod: 'starting from',
     popular: true,
     badge: 'HIGH PERFORMANCE',
-    description: 'Custom iOS & Android mobile application built with Flutter or React Native tailored to your exact business logic.',
+    description: 'Custom iOS & Android mobile application built with Flutter tailored to your exact business logic.',
     features: [
-      'Cross-Platform Native (Android + iOS)',
+      'Cross-Platform Mobile App (iOS & Android via Flutter)',
       'Bespoke High-End UI/UX Design System',
       'Dedicated Real-Time Admin Dashboard',
       'REST / GraphQL Custom API Integration',
@@ -190,13 +272,13 @@ export const elitePackages: PricingPackage[] = [
     description: 'Complete digital ecosystem uniting a bespoke high-performance web platform and cross-platform mobile apps.',
     features: [
       'Custom Web Platform / Modern Website',
-      'Native Android Mobile Application',
-      'Native iOS Mobile Application',
+      'Cross-Platform Mobile App (iOS & Android via Flutter)',
       'Unified Master Admin Control Panel',
       'Free Domain & Enterprise Cloud Hosting',
       'Custom UI/UX Design System Across All Screens',
       'Single Synchronized Database & APIs',
-      'Standard Launch & Store Submission Assistance'
+      'Standard Launch & Store Submission Assistance',
+      'Lead Generation & Contact Workflow'
     ],
     whatsAppMessage: "Hello ZURVIX, I am interested in the ELITE 01 (Website + Mobile App) package starting from €800. I would like to discuss my project."
   },
@@ -208,10 +290,10 @@ export const elitePackages: PricingPackage[] = [
     billingPeriod: 'starting from',
     popular: true,
     badge: '⭐ MOST POPULAR BUNDLE',
-    description: 'Our most comprehensive transformation bundle: Custom Web, Android & iOS Apps, plus a full digital marketing and AI search launch kickoff.',
+    description: 'Our most comprehensive transformation bundle: Custom Web, iOS & Android Apps via Flutter, plus a full digital marketing and AI search launch kickoff.',
     features: [
       'Custom High-Performance Web Application',
-      'Android & iOS Mobile Applications',
+      'Cross-Platform Mobile App (iOS & Android via Flutter)',
       'Unified Super Admin Management Panel',
       'Free Domain & Scalable Cloud Hosting Setup',
       'Complete Digital Marketing Campaign Launch',
@@ -219,7 +301,7 @@ export const elitePackages: PricingPackage[] = [
       'Full On-Page SEO + GEO + LLM Optimization Kickoff',
       'VIP Priority Support & Launch Strategy Session'
     ],
-    whatsAppMessage: "Hello ZURVIX, I am interested in the ELITE 02 (Website + App + Digital Growth) package starting from €1,000. I would like to discuss my project."
+    whatsAppMessage: "Hello ZURVIX, I am interested in the ELITE 02 (Web + App + Digital Growth) package starting from €1,000. I would like to discuss my project."
   }
 ];
 
@@ -237,7 +319,7 @@ export const maintenancePackages: PricingPackage[] = [
       'Core Web Vitals & Speed Optimization Tuning',
       'Daily Automated Offsite Cloud Backups',
       'Priority Bug Fixes & Code Troubleshooting',
-      'Monthly Content & Graphic Changes',
+      'Dedicated Hours for Content & Code Updates',
       'Framework, Plugin & Dependency Upgrades',
       'Direct WhatsApp & Email Technical Support'
     ],

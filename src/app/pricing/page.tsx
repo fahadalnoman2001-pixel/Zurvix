@@ -21,12 +21,16 @@ export default function PricingPage() {
 
   const faqs = [
     {
-      q: 'Why are packages listed as "Starting from"?',
-      a: 'Every business has distinct requirements. Our starting prices provide high-quality foundational builds with standard scopes (e.g. domain, hosting, responsive layouts), while larger multi-vendor or high-traffic apps are quoted transparently based on custom integrations.'
+      q: 'Do you offer a website-only package?',
+      a: 'Yes. Our STARTER Website package starts from €300 for businesses needing a fast, professional, high-converting digital presence (up to ~5 pages, mobile-responsive, contact forms, SEO setup, and free domain/hosting for year 1) without a mobile app.'
     },
     {
-      q: 'What is included in the WhatsApp consultation?',
-      a: 'You get a direct 1-on-1 strategy conversation with our founder or lead technical architect to clarify your project timeline, feature roadmap, and exact cost without any sales pressure.'
+      q: 'Do you build ecommerce stores?',
+      a: 'Yes. Our ECOMMERCE package starting from €600 includes complete store setup on Shopify, WooCommerce, or custom Laravel with product catalog structure (up to ~30 SKUs), secure payment gateway integrations (Stripe, PayPal), and mobile-optimized checkout.'
+    },
+    {
+      q: 'Why are packages listed as "Starting from"?',
+      a: 'Every business has distinct requirements. Our starting prices provide high-quality foundational builds with standard scopes (e.g. domain, hosting, responsive layouts), while larger multi-vendor or high-traffic apps are quoted transparently based on custom integrations.'
     },
     {
       q: 'How does the monthly maintenance plan work?',
@@ -34,7 +38,11 @@ export default function PricingPage() {
     },
     {
       q: 'Can I bundle a website and mobile app together?',
-      a: 'Yes! Our ELITE packages (€800 and €1,000) are explicitly architected as all-in-one bundles that unify custom web platforms, iOS/Android mobile applications, and digital marketing setups.'
+      a: 'Yes! Our ELITE packages (€800 and €1,000) are explicitly architected as all-in-one bundles that unify custom web platforms, iOS/Android cross-platform apps (via Flutter), and digital marketing setups.'
+    },
+    {
+      q: 'What is included in the WhatsApp consultation?',
+      a: 'You get a direct 1-on-1 strategy conversation with our founder or lead technical architect to clarify your project timeline, feature roadmap, and exact cost without any sales pressure.'
     }
   ];
 
