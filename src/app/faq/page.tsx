@@ -6,168 +6,158 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
 import WhatsAppModal from '@/components/WhatsAppModal';
-import { ChevronDown, HelpCircle, ArrowRight, MessageSquare } from 'lucide-react';
+import {
+  HelpCircle,
+  ChevronDown,
+  ArrowRight,
+  MessageSquare,
+  Sparkles,
+  Layers,
+} from 'lucide-react';
 
-// ── FAQ Data ──
-interface FaqItem {
+// ── Complete 18 FAQ Items Across 4 Strict Categories ──
+export interface FaqItem {
   question: string;
   answer: string;
 }
 
-interface FaqCategory {
-  title: string;
-  icon: string;
+export interface FaqCategorySection {
+  id: string;
+  category: string;
+  badge: string;
+  description: string;
   items: FaqItem[];
 }
 
-const faqCategories: FaqCategory[] = [
+export const faqCategorySections: FaqCategorySection[] = [
   {
-    title: 'General',
-    icon: '🏢',
+    id: 'pricing-budget',
+    category: 'Pricing & Budget',
+    badge: '01 // PRICING & BUDGET',
+    description: 'Clear, deliverable-based pricing with no hidden costs or recurring traps.',
     items: [
       {
-        question: 'What is ZURVIX?',
-        answer: 'ZURVIX is a premier digital agency and technology partner specializing in custom website & mobile app design, full-stack development (Next.js, Laravel, Flutter), ecommerce platforms, SEO, Generative Engine Optimization (GEO), and LLM AI search optimization. We provide end-to-end digital solutions for businesses of all sizes.',
+        question: 'How much does a website cost in Malta?',
+        answer:
+          'ZURVIX websites start from €300 for a single-page or small business site, with full custom platforms typically ranging from €800–€1,500 depending on pages, integrations, and design complexity. Ecommerce and multi-language builds cost more due to payment gateway setup, product catalog structure, and additional testing. Every quote is itemized by deliverable, not a single lump sum.',
       },
       {
-        question: 'Who is behind ZURVIX?',
-        answer: 'ZURVIX was founded by Fahad Al Noman, a senior technologist with 7+ years of hands-on experience in full-stack web & mobile development, UI/UX design, and digital marketing. Every project is personally architected and quality-reviewed by Fahad.',
+        question: 'How much does a mobile app cost?',
+        answer:
+          'Mobile app development at ZURVIX starts from €500 for a cross-platform app covering both iOS and Android, rising based on backend complexity, third-party integrations (payments, maps, push notifications), and admin panel requirements. A combined website + app bundle starts from €800.',
       },
       {
-        question: 'Where is ZURVIX based?',
-        answer: 'ZURVIX operates globally and serves clients worldwide. Our primary communication channels are WhatsApp (+356 99784477) and email (hello@zurvix.com), ensuring fast, direct access regardless of your timezone.',
+        question: 'How much does SEO cost for a small business?',
+        answer:
+          'SEO pricing depends on competitiveness of your market and whether it\'s a one-time technical setup or an ongoing monthly service. A technical SEO foundation (on-page optimization, schema markup, sitemap, Search Console setup) is typically a fixed one-time cost, while content and link-building work is usually billed monthly as a retainer.',
       },
       {
-        question: 'What industries does ZURVIX serve?',
-        answer: 'We serve all industries including ecommerce, SaaS, healthcare, real estate, education, hospitality, professional services, startups, and enterprise organizations. Our solutions are tailored to each industry\'s unique requirements.',
+        question: 'Are there hidden fees or recurring costs?',
+        answer:
+          'No — ZURVIX publishes starting prices for every service and breaks quotes down by deliverable before work begins. The only recurring costs are optional: hosting renewal, domain renewal, and ongoing maintenance/support plans, which are quoted separately and clearly upfront.',
+      },
+      {
+        question: 'What determines whether my project costs more or less than the starting price?',
+        answer:
+          'Price moves based on number of pages/screens, custom functionality (booking systems, dashboards, payment integrations), content volume you need written, and timeline urgency. A discovery call before any quote pins down these variables so the number you receive is accurate, not a placeholder.',
       },
     ],
   },
   {
-    title: 'Services',
-    icon: '⚙️',
+    id: 'timeline-process',
+    category: 'Timeline & Process',
+    badge: '02 // TIMELINE & PROCESS',
+    description: 'Structured 4-stage engineering workflow with milestone approvals.',
     items: [
       {
-        question: 'What services does ZURVIX offer?',
-        answer: 'We offer a comprehensive suite of digital services: UI/UX Design, Website Development (Next.js, Laravel, WordPress), Mobile App Development (Flutter, React Native), Ecommerce Development, SEO + GEO + LLM AI Search Optimization, Social Media Marketing, and 24/7 Website Maintenance.',
+        question: 'How long does it take to build a website?',
+        answer:
+          'A standard business website typically takes 2–4 weeks from kickoff to launch. Ecommerce stores and custom web applications take 4–8 weeks depending on the number of integrations and content readiness on the client side.',
       },
       {
-        question: 'Does ZURVIX work with startups and small businesses?',
-        answer: 'Absolutely! We work with solo entrepreneurs, startups, small businesses, and enterprises alike. Our packages start from just €300, making professional digital products accessible to businesses at any stage of growth.',
+        question: 'How long does it take to build a mobile app?',
+        answer:
+          'A cross-platform mobile app (iOS + Android) generally takes 6–10 weeks, covering design, development, testing, and app store submission. Timelines extend for apps requiring custom backend infrastructure or complex third-party integrations like payments or real-time messaging.',
       },
       {
-        question: 'What technologies does ZURVIX use?',
-        answer: 'Our core stack includes Next.js (React), Laravel (PHP), Flutter, React Native, TypeScript, Tailwind CSS, PostgreSQL, MySQL, Firebase, Supabase, AWS, Vercel, and Docker. We select the optimal technology for each project\'s specific requirements.',
+        question: 'What does the process look like from start to finish?',
+        answer:
+          'The process runs through four stages: discovery and scoping, UI/UX design, development and testing, then launch and handover. Clients review and approve work at each stage before the next begins, so there are no surprises at delivery.',
       },
       {
-        question: 'Can ZURVIX build custom AI-powered features?',
-        answer: 'Yes. We integrate AI capabilities including chatbots, recommendation engines, content generation, automated workflows, and custom LLM integrations using OpenAI API, Google Gemini, and other AI platforms.',
-      },
-      {
-        question: 'Does ZURVIX provide hosting and domain setup?',
-        answer: 'Yes. All our website and app packages include free domain registration guidance and high-performance cloud hosting setup. We handle the entire technical infrastructure so you can focus on your business.',
+        question: 'Do I need to provide content, or does the agency write it?',
+        answer:
+          'Clients can provide their own copy and images, or ZURVIX can write website copy as part of the package. Either way, content readiness is usually the single biggest factor affecting whether a project finishes on time.',
       },
     ],
   },
   {
-    title: 'Pricing & Payments',
-    icon: '💰',
+    id: 'ownership-tech-maintenance',
+    category: 'Ownership, Tech & Maintenance',
+    badge: '03 // OWNERSHIP & TECH',
+    description: '100% source code ownership, zero vendor lock-in, modern scalable stack.',
     items: [
       {
-        question: 'How does ZURVIX pricing work?',
-        answer: 'Our packages have transparent starting prices — Business Website from €300, Custom Website from €350, Ecommerce from €500, Mobile App from €700. Final pricing depends on project complexity, features, and scope. We provide a detailed quote after understanding your requirements.',
+        question: 'Who owns the website after it\'s built?',
+        answer:
+          'The client owns 100% of the source code, design files, and domain once the final payment is made — there is no vendor lock-in. This is stated explicitly in every proposal, not left as an assumption.',
       },
       {
-        question: 'What payment methods does ZURVIX accept?',
-        answer: 'We accept bank transfers, PayPal, Wise (TransferWise), and major credit/debit cards. Payment schedules are typically structured as milestone-based installments for larger projects.',
+        question: 'What happens if I want to switch developers or agencies later?',
+        answer:
+          'Because you own the full source code and hosting/domain access, you can move to any developer or agency at any time without needing permission or paying an exit fee. This is a standard, non-negotiable term.',
       },
       {
-        question: 'Is there a refund policy?',
-        answer: 'Work completed up to each milestone is non-refundable as it represents delivered intellectual property. However, we offer unlimited revisions within scope to ensure you\'re 100% satisfied before each milestone sign-off.',
+        question: 'Do you offer ongoing maintenance and support?',
+        answer:
+          'Yes — maintenance plans cover uptime monitoring, security patching, backups, and speed tuning on a monthly retainer. Support is optional, not bundled into the one-time build price, so clients only pay for it if they want it.',
       },
       {
-        question: 'Are there any hidden fees?',
-        answer: 'No hidden fees. The quoted price covers everything discussed in the project scope. Third-party costs (domain registration, premium hosting tiers, app store fees) are transparently communicated upfront.',
+        question: 'What platform or technology do you build on?',
+        answer:
+          'Websites are built on Next.js and React for speed and SEO performance, ecommerce runs on Shopify or custom Laravel-based systems depending on scale, and mobile apps use Flutter for a single cross-platform codebase covering iOS and Android. This keeps long-term maintenance costs lower than maintaining separate native codebases.',
+      },
+      {
+        question: 'Will my website be fast and mobile-friendly?',
+        answer:
+          'Yes — every build is tested against Google\'s Core Web Vitals (loading speed, interactivity, visual stability) before launch, and designed mobile-first since most traffic in Malta and Europe now comes from phones.',
       },
     ],
   },
   {
-    title: 'Development Process',
-    icon: '🚀',
+    id: 'seo-geo-ai-search',
+    category: 'SEO, GEO & AI Search',
+    badge: '04 // SEO, GEO & AI SEARCH',
+    description: 'Optimized for traditional Google rankings and direct AI citations.',
     items: [
       {
-        question: 'How long does a typical project take?',
-        answer: 'Business websites typically launch in 1–2 weeks. Custom platforms and web applications take 2–6 weeks. Mobile apps take 4–8 weeks. Marketing campaigns are ongoing monthly retainers. Exact timelines are provided after the discovery consultation.',
+        question: 'What is the difference between SEO and GEO?',
+        answer:
+          'SEO (Search Engine Optimization) helps your website rank in traditional Google search results. GEO (Generative Engine Optimization) helps your business get mentioned and cited directly inside AI-generated answers from tools like ChatGPT, Perplexity, and Google AI Overviews. Both rely on the same foundation — clear, authoritative, well-structured content — but GEO adds specific formatting for AI extraction.',
       },
       {
-        question: 'How does communication work during a project?',
-        answer: 'We communicate directly via WhatsApp for real-time updates and decisions. You\'ll have direct access to the founder and lead engineer. We provide regular progress updates, preview links, and feedback rounds throughout the development process.',
+        question: 'Why does AI search (ChatGPT, Perplexity) matter for my business?',
+        answer:
+          'More people are asking AI tools direct questions instead of clicking through search results, which means a business invisible to AI platforms is losing a growing share of discovery traffic. Being cited inside an AI answer builds trust with a buyer before they\'ve even visited your website.',
       },
       {
-        question: 'How many revisions are included?',
-        answer: 'We include multiple revision rounds at each project milestone. Our goal is to get it right — we iterate until you\'re completely satisfied with the design and functionality before moving to the next phase.',
+        question: 'How do you optimize a website for AI search engines?',
+        answer:
+          'GEO optimization includes structuring content in clear question-and-answer format, adding schema markup (FAQPage, Organization, Service) so AI systems can parse your business accurately, and publishing an llm.txt file that gives AI crawlers a direct, machine-readable summary of your site. ZURVIX implements all three as standard on every build.',
       },
       {
-        question: 'Do I own the source code after project completion?',
-        answer: 'Yes, absolutely. Upon full payment, you receive complete ownership of all source code, design files, assets, and documentation created for your project. You have full freedom to modify, extend, or migrate your project.',
-      },
-      {
-        question: 'Can ZURVIX work with my existing website or app?',
-        answer: 'Yes. We regularly take over, redesign, rebuild, or optimize existing digital products. We\'ll conduct a thorough audit of your current platform and recommend the best path forward.',
-      },
-    ],
-  },
-  {
-    title: 'SEO & AI Search',
-    icon: '🤖',
-    items: [
-      {
-        question: 'What is GEO (Generative Engine Optimization)?',
-        answer: 'GEO is the practice of optimizing your digital presence so that AI-powered search engines — like ChatGPT, Claude, Perplexity, and Google Gemini — accurately cite and recommend your business in their responses. It goes beyond traditional SEO to ensure your brand appears in AI-generated answers.',
-      },
-      {
-        question: 'How does LLM (AI Search) optimization work?',
-        answer: 'We structure your content, metadata, and digital footprint so that large language models understand your brand, services, and value proposition. This includes creating llm.txt files, structured data markup, authoritative content clusters, and entity-level knowledge graph engineering.',
-      },
-      {
-        question: 'Does ZURVIX provide ongoing SEO services?',
-        answer: 'Yes. Our SEO + GEO + LLM optimization package starts from €500/month and includes technical SEO audits, content strategy, backlink building, keyword research, schema markup, AI search optimization, and monthly performance reporting.',
-      },
-      {
-        question: 'Will my website rank on Google?',
-        answer: 'While no one can guarantee specific rankings, we implement comprehensive technical SEO, on-page optimization, content strategy, and structured data that significantly improve your search visibility. Our GEO strategies also ensure your brand appears in AI search results.',
-      },
-    ],
-  },
-  {
-    title: 'Support & Maintenance',
-    icon: '🛡️',
-    items: [
-      {
-        question: 'Does ZURVIX provide post-launch support?',
-        answer: 'Yes. Every project includes a complimentary post-launch support period. For ongoing support, our Website Maintenance plan (from €200/month) provides 24/7 monitoring, security scans, backups, bug fixes, and priority technical support.',
-      },
-      {
-        question: 'What does the maintenance plan include?',
-        answer: '24/7 automated uptime monitoring, weekly security scans, Core Web Vitals optimization, daily cloud backups, priority bug fixes, framework & dependency upgrades, monthly content changes, and direct WhatsApp & email technical support.',
-      },
-      {
-        question: 'How do I get in touch for urgent issues?',
-        answer: 'Maintenance clients have direct WhatsApp access (+356 99784477) for urgent issues. We aim to respond within 1 hour during business hours and within 4 hours for after-hours emergencies.',
-      },
-      {
-        question: 'Can I upgrade my website or app later?',
-        answer: 'Absolutely. All our projects are built with scalable architectures designed for growth. We can add new features, integrate third-party services, expand to new platforms, or completely redesign at any time.',
+        question: 'How long does SEO take to show results?',
+        answer:
+          'Technical SEO fixes (site speed, schema, indexing) can show measurable improvement within 2–4 weeks. Competitive keyword rankings and organic traffic growth typically take 3–6 months, since Google needs to trust a site\'s authority over time — anyone promising instant top rankings is not being straight with you.',
       },
     ],
   },
 ];
 
-// ── Flatten all Q&A for schema markup ──
-const allFaqItems = faqCategories.flatMap((cat) => cat.items);
+// ── Complete 18-Question FAQPage JSON-LD Schema (Character-for-Character Identical) ──
+const allFaqItems = faqCategorySections.flatMap((s) => s.items);
 
-// ── JSON-LD FAQPage Schema ──
-const faqSchema = {
+const faqSchemaJson = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: allFaqItems.map((item) => ({
@@ -178,44 +168,14 @@ const faqSchema = {
       text: item.answer,
     },
   })),
-};
+});
 
-// ── Accordion Item Component ──
-function AccordionItem({ item, isOpen, onToggle }: { item: FaqItem; isOpen: boolean; onToggle: () => void }) {
-  return (
-    <div className="border-b border-white/[0.06] last:border-b-0">
-      <button
-        onClick={onToggle}
-        className="flex w-full items-center justify-between py-5 px-1 text-left cursor-pointer group"
-        aria-expanded={isOpen}
-      >
-        <span className={`text-sm sm:text-base font-semibold pr-4 transition-colors ${isOpen ? 'text-[#00DF81]' : 'text-white group-hover:text-[#00DF81]'}`}>
-          {item.question}
-        </span>
-        <ChevronDown
-          className={`h-5 w-5 shrink-0 transition-transform duration-300 ${
-            isOpen ? 'rotate-180 text-[#00DF81]' : 'text-gray-500 group-hover:text-[#00DF81]'
-          }`}
-        />
-      </button>
-      <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? 'max-h-[500px] opacity-100 pb-5' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <p className="text-sm text-gray-400 leading-relaxed px-1">
-          {item.answer}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// ── Main FAQ Page ──
 export default function FaqPage() {
   const [isSalesModalOpen, setIsSalesModalOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState(0);
-  const [openItems, setOpenItems] = useState<Set<string>>(new Set());
+  const [openItems, setOpenItems] = useState<Set<string>>(() => {
+    // Open the first question of every category by default
+    return new Set(['0-0', '1-0', '2-0', '3-0']);
+  });
 
   const toggleItem = (key: string) => {
     setOpenItems((prev) => {
@@ -229,19 +189,33 @@ export default function FaqPage() {
     });
   };
 
+  const expandAll = () => {
+    const allKeys = new Set<string>();
+    faqCategorySections.forEach((cat, catIdx) => {
+      cat.items.forEach((_, itemIdx) => {
+        allKeys.add(`${catIdx}-${itemIdx}`);
+      });
+    });
+    setOpenItems(allKeys);
+  };
+
+  const collapseAll = () => {
+    setOpenItems(new Set());
+  };
+
   return (
     <main className="min-h-screen bg-[#05080A] text-white selection:bg-[#00DF81] selection:text-black">
       <CustomCursor />
       <Navbar onOpenSalesModal={() => setIsSalesModalOpen(true)} />
 
-      {/* JSON-LD FAQPage Schema */}
+      {/* JSON-LD Structured Data for Google Rich Results & AI Crawlers */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: faqSchemaJson }}
       />
 
-      {/* Hero Header */}
-      <section className="pt-36 pb-16 relative overflow-hidden bg-[#05080A]">
+      {/* Hero Section */}
+      <section className="pt-36 pb-14 relative overflow-hidden bg-[#05080A]">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#00DF81]/5 rounded-full blur-[150px] pointer-events-none" />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6">
@@ -255,69 +229,149 @@ export default function FaqPage() {
             <span className="text-gradient-green">We&apos;ve Got Answers.</span>
           </h1>
 
-          <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Everything you need to know about our services, pricing, process, and support. Can&apos;t find what you&apos;re looking for? Reach out to us directly.
+          {/* Prompt Required 1-Sentence Intro Context Paragraph */}
+          <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed font-normal">
+            Answers to the questions we hear most often from businesses in Malta and across Europe about websites, apps, SEO and AI search.
           </p>
+
+          {/* Quick Anchor Navigation Bar */}
+          <div className="pt-4 flex flex-wrap justify-center gap-2 sm:gap-3">
+            {faqCategorySections.map((sec) => (
+              <a
+                key={sec.id}
+                href={`#${sec.id}`}
+                className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-mono font-medium text-gray-300 hover:text-white hover:border-[#00DF81]/40 hover:bg-white/[0.06] transition-all"
+              >
+                <span>{sec.category}</span>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Category Tabs + Accordion */}
+      {/* Main FAQ Sections */}
       <section className="pb-24 relative">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Category Pills */}
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12">
-            {faqCategories.map((cat, idx) => (
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+          
+          {/* Controls Bar */}
+          <div className="flex items-center justify-between border-b border-white/[0.08] pb-4 text-xs font-mono text-gray-400">
+            <span>18 Frequently Asked Questions</span>
+            <div className="flex items-center space-x-4">
               <button
-                key={cat.title}
-                onClick={() => setActiveCategory(idx)}
-                className={`inline-flex items-center space-x-2 rounded-full px-4 py-2 text-xs sm:text-sm font-medium transition-all cursor-pointer ${
-                  activeCategory === idx
-                    ? 'bg-[#00DF81] text-[#05080A] shadow-lg shadow-[#00DF81]/25'
-                    : 'border border-white/10 bg-white/[0.03] text-gray-400 hover:bg-white/[0.06] hover:text-white hover:border-white/20'
-                }`}
+                onClick={expandAll}
+                className="hover:text-[#00DF81] transition-colors cursor-pointer"
               >
-                <span>{cat.icon}</span>
-                <span>{cat.title}</span>
+                [ Expand All ]
               </button>
-            ))}
-          </div>
-
-          {/* Active Category Accordion */}
-          <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 sm:p-8 backdrop-blur-sm">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-6 flex items-center space-x-3">
-              <span className="text-2xl">{faqCategories[activeCategory].icon}</span>
-              <span>{faqCategories[activeCategory].title}</span>
-            </h2>
-
-            <div>
-              {faqCategories[activeCategory].items.map((item, itemIdx) => {
-                const key = `${activeCategory}-${itemIdx}`;
-                return (
-                  <AccordionItem
-                    key={key}
-                    item={item}
-                    isOpen={openItems.has(key)}
-                    onToggle={() => toggleItem(key)}
-                  />
-                );
-              })}
+              <span>•</span>
+              <button
+                onClick={collapseAll}
+                className="hover:text-[#00DF81] transition-colors cursor-pointer"
+              >
+                [ Collapse All ]
+              </button>
             </div>
           </div>
 
-          {/* Quick Stats */}
-          <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {/* Render All 4 Categories in Exact Specified Order */}
+          {faqCategorySections.map((categorySection, catIdx) => (
+            <section
+              key={categorySection.id}
+              id={categorySection.id}
+              className="scroll-mt-28 space-y-6"
+            >
+              {/* Category Header as <h2> per SEO requirement */}
+              <div className="space-y-2 border-b border-white/[0.08] pb-4">
+                <span className="text-xs font-mono font-semibold text-[#00DF81]">
+                  {categorySection.badge}
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                  {categorySection.category}
+                </h2>
+                <p className="text-xs sm:text-sm text-gray-400">
+                  {categorySection.description}
+                </p>
+              </div>
+
+              {/* Category Accordion / Static Q&A List */}
+              <div className="space-y-4">
+                {categorySection.items.map((item, itemIdx) => {
+                  const key = `${catIdx}-${itemIdx}`;
+                  const isOpen = openItems.has(key);
+
+                  return (
+                    <div
+                      key={key}
+                      className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
+                        isOpen
+                          ? 'border-[#00DF81]/40 bg-[#080C11] shadow-xl shadow-black/40'
+                          : 'border-white/[0.08] bg-[#080C11]/60 hover:border-white/20'
+                      }`}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => toggleItem(key)}
+                        className="flex w-full items-center justify-between p-5 sm:p-6 text-left cursor-pointer group"
+                        aria-expanded={isOpen}
+                      >
+                        {/* Question as <h3> per SEO requirement */}
+                        <h3
+                          className={`text-base sm:text-lg font-bold pr-4 transition-colors leading-snug ${
+                            isOpen
+                              ? 'text-[#00DF81]'
+                              : 'text-white group-hover:text-[#00DF81]'
+                          }`}
+                        >
+                          {item.question}
+                        </h3>
+                        <div
+                          className={`h-8 w-8 rounded-full flex items-center justify-center shrink-0 border transition-all duration-300 ${
+                            isOpen
+                              ? 'border-[#00DF81]/30 bg-[#00DF81]/10 text-[#00DF81] rotate-180'
+                              : 'border-white/10 bg-white/[0.03] text-gray-400 group-hover:text-white group-hover:border-white/20'
+                          }`}
+                        >
+                          <ChevronDown className="h-4 w-4" />
+                        </div>
+                      </button>
+
+                      {/* Answer paragraph always present in DOM for Google & AI crawlers */}
+                      <div
+                        className={`transition-all duration-300 ease-in-out px-5 sm:px-6 overflow-hidden ${
+                          isOpen
+                            ? 'max-h-[800px] opacity-100 pb-6'
+                            : 'max-h-0 opacity-0 pb-0'
+                        }`}
+                      >
+                        <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal border-t border-white/[0.06] pt-4">
+                          {item.answer}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          ))}
+
+          {/* Quick Value Metrics */}
+          <div className="pt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
-              { label: 'Packages From', value: '€300' },
-              { label: 'Launch Time', value: '1-2 Weeks' },
-              { label: 'Founder Experience', value: '7+ Years' },
+              { label: 'Starting Price', value: '€300' },
+              { label: 'Web Launch', value: '2-4 Weeks' },
               { label: 'Code Ownership', value: '100%' },
+              { label: 'GEO & LLM Standard', value: 'Included' },
             ].map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 text-center space-y-1"
+                className="rounded-2xl border border-white/[0.08] bg-[#080C11] p-5 text-center space-y-1"
               >
-                <p className="text-xl sm:text-2xl font-extrabold text-[#00DF81]">{stat.value}</p>
-                <p className="text-[10px] sm:text-xs text-gray-400 font-mono uppercase tracking-wider">{stat.label}</p>
+                <p className="text-xl sm:text-2xl font-extrabold text-[#00DF81]">
+                  {stat.value}
+                </p>
+                <p className="text-[10px] sm:text-xs text-gray-400 font-mono uppercase tracking-wider">
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>
@@ -325,17 +379,18 @@ export default function FaqPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 border-t border-white/[0.06] bg-[#05080A]">
+      <section className="py-20 border-t border-white/[0.08] bg-[#05080A]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <div className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
-            <span>{'// STILL HAVE QUESTIONS?'}</span>
+            <Sparkles className="h-3.5 w-3.5" />
+            <span>{'// DIRECT DISCOVERY CONSULTATION'}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Let&apos;s Talk Directly
+            Have a Specific Question About Your Project?
           </h2>
-          <p className="text-sm sm:text-base text-gray-400 max-w-lg mx-auto">
-            Connect with our founder on WhatsApp for an immediate, no-obligation discovery consultation.
+          <p className="text-sm sm:text-base text-gray-300 max-w-lg mx-auto">
+            Connect directly with our senior engineer and growth architect on WhatsApp for an immediate, transparent estimate.
           </p>
 
           <div className="pt-3 flex flex-wrap items-center justify-center gap-4">
@@ -347,10 +402,17 @@ export default function FaqPage() {
               <span>Chat on WhatsApp</span>
             </button>
             <Link
-              href="/contact"
+              href="/pricing"
               className="inline-flex items-center space-x-2 rounded-full border border-white/20 bg-white/[0.03] px-8 py-4 text-xs sm:text-sm font-semibold text-white hover:bg-white/10 hover:border-white/30 transition-all"
             >
-              <span>Send Project Brief</span>
+              <Layers className="h-4 w-4" />
+              <span>View All Pricing Plans</span>
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.02] px-8 py-4 text-xs sm:text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/[0.06] transition-all"
+            >
+              <span>Submit Project Brief</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

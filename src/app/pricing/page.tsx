@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
 import WhatsAppModal from '@/components/WhatsAppModal';
 import Pricing from '@/components/Pricing';
 import { PricingPackage } from '@/data/packages';
+import { ArrowRight } from 'lucide-react';
 
 export default function PricingPage() {
   const [isSalesModalOpen, setIsSalesModalOpen] = useState(false);
@@ -94,6 +96,17 @@ export default function PricingPage() {
                 </p>
               </div>
             ))}
+          </div>
+
+          {/* Contextual Link to Full FAQ Page */}
+          <div className="mt-12 text-center">
+            <Link
+              href="/faq"
+              className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3.5 text-xs sm:text-sm font-semibold text-white hover:bg-white/[0.08] hover:border-[#00DF81]/40 hover:text-[#00DF81] transition-all group"
+            >
+              <span>See All 18 Website, App &amp; SEO Pricing FAQs</span>
+              <ArrowRight className="h-4 w-4 text-[#00DF81] transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
         </div>
       </section>

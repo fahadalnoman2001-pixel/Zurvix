@@ -31,6 +31,7 @@ export default function Navbar({ onOpenSalesModal }: NavbarProps) {
     { name: 'Pricing', href: '/pricing' },
     { name: 'About', href: '/about' },
     { name: 'Blog', href: '/blog' },
+    { name: 'FAQ', href: '/faq' },
     { name: 'Contact', href: '/contact' },
   ];
 

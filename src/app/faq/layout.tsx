@@ -4,16 +4,20 @@ import { fetchSeo } from '@/lib/api';
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await fetchSeo('faq');
 
-  const title = seo?.meta_title || 'FAQ — Frequently Asked Questions | ZURVIX Digital Agency';
+  const title = seo?.meta_title || 'FAQ | Website, App & SEO Pricing Questions Answered | ZURVIX';
   const description =
     seo?.meta_description ||
-    'Find answers to common questions about ZURVIX digital agency services, pricing, development process, SEO & GEO optimization, support, and more.';
+    'Answers to the most common questions about website costs, app development, SEO, GEO and AI search optimization, timelines and maintenance for businesses in Malta and Europe.';
 
   return {
     title,
     description,
     alternates: {
       canonical: 'https://zurvix.com/faq',
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
     openGraph: {
       title: seo?.og_title || title,
