@@ -9,7 +9,7 @@ import WhatsAppModal from '@/components/WhatsAppModal';
 import WhatWeDo from '@/components/WhatWeDo';
 import Process from '@/components/Process';
 import { PricingPackage } from '@/data/packages';
-import { Sparkles, ArrowRight, CheckCircle2, Code2, Smartphone, TrendingUp, ShieldCheck, Zap, Layers } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function ServicesPage() {
   const [isSalesModalOpen, setIsSalesModalOpen] = useState(false);
@@ -40,7 +40,7 @@ export default function ServicesPage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6">
           <div className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
-            <span>// SERVICES &amp; CAPABILITIES</span>
+            <span>{'// SERVICES & CAPABILITIES'}</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight max-w-4xl mx-auto leading-tight">
@@ -79,7 +79,7 @@ export default function ServicesPage() {
       <section className="py-24 bg-[#05080A] border-t border-white/[0.06]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <div className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
-            <span>// ARCHITECTURAL CONSULTATION</span>
+            <span>{'// ARCHITECTURAL CONSULTATION'}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
@@ -88,12 +88,12 @@ export default function ServicesPage() {
           <p className="text-sm sm:text-base text-gray-400 max-w-xl mx-auto">
             Our senior engineers build custom integrations, API backends, AI agents, and mobile apps tailored to your exact business logic.
           </p>
-          <div className="pt-2">
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/contact"
               className="inline-flex items-center space-x-2 rounded-full bg-[#00DF81] px-8 py-4 text-xs sm:text-sm font-bold text-[#05080A] hover:bg-[#00F58D] transition-all shadow-xl shadow-[#00DF81]/25 hover:scale-105"
             >
-              <span>Request Custom Architecture Proposal</span>
+              <span>Discuss Custom Solution</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

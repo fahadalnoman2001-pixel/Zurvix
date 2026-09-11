@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
-import { ArrowRight, Sparkles, Code2, Smartphone, Bot, Rocket, CheckCircle2, Globe2 } from 'lucide-react';
+import { ArrowRight, Globe2 } from 'lucide-react';
 import CosmicTechCanvas, { TechPlanet } from './CosmicTechCanvas';
 import MobileCosmicNexus from './MobileCosmicNexus';
 
@@ -84,16 +83,16 @@ export default function HeroSection({ onStartProject }: HeroSectionProps) {
             <div className="flex justify-center lg:justify-start">
               <div className="inline-flex items-center p-1 rounded-full border border-white/10 bg-[#080C11]/80 backdrop-blur-xl shadow-lg">
                 {[
-                  { key: 'all', label: 'All', fullLabel: '🚀 All Systems' },
-                  { key: 'web', label: 'Web', fullLabel: '🌐 Web & Next' },
-                  { key: 'mobile', label: 'Mobile', fullLabel: '📱 Mobile' },
-                  { key: 'ai', label: 'AI & GEO', fullLabel: '🧠 AI & GEO' },
+                  { key: 'all' as const, label: 'All', fullLabel: '🚀 All Systems' },
+                  { key: 'web' as const, label: 'Web', fullLabel: '🌐 Web & Next' },
+                  { key: 'mobile' as const, label: 'Mobile', fullLabel: '📱 Mobile' },
+                  { key: 'ai' as const, label: 'AI & GEO', fullLabel: '🧠 AI & GEO' },
                 ].map((tab) => {
                   const isActive = filterCategory === tab.key;
                   return (
                     <button
                       key={tab.key}
-                      onClick={() => setFilterCategory(tab.key as any)}
+                      onClick={() => setFilterCategory(tab.key)}
                       className={`rounded-full px-3 sm:px-4 py-1 sm:py-1.5 text-[11px] sm:text-xs font-semibold transition-all duration-200 cursor-pointer ${
                         isActive
                           ? 'bg-[#00DF81] text-[#05080A] font-bold shadow-md shadow-[#00DF81]/25'

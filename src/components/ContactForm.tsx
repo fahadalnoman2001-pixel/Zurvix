@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { MessageSquare, Mail, ArrowRight, CheckCircle2, ShieldCheck, Send, Loader2, AlertCircle } from 'lucide-react';
+import { MessageSquare, Mail, ArrowRight, CheckCircle2, ShieldCheck, Loader2, AlertCircle } from 'lucide-react';
 import SocialLinks from './SocialLinks';
 import { submitContact } from '@/lib/api';
 
@@ -56,9 +56,9 @@ export default function ContactForm() {
       });
       setSubmitted(true);
     } catch (err: unknown) {
-      console.warn('API submission notice:', err);
-      // Still show success to client with WhatsApp fallback option
-      setSubmitted(true);
+      console.error('Contact submission error:', err);
+      const msg = err instanceof Error ? err.message : 'Unable to submit your inquiry. Please try again or message us on WhatsApp.';
+      setError(msg);
     } finally {
       setLoading(false);
     }
@@ -77,7 +77,7 @@ export default function ContactForm() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
-            <span>// START A CONVERSATION</span>
+            <span>{'// START A CONVERSATION'}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
@@ -95,7 +95,7 @@ export default function ContactForm() {
           <div className="lg:col-span-5 space-y-6">
             <div className="rounded-3xl border border-white/[0.08] bg-[#080C11] p-8 space-y-6">
               <span className="text-xs font-mono uppercase tracking-widest text-[#00DF81]">
-                // DIRECT CHANNELS
+                {'// DIRECT CHANNELS'}
               </span>
               <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
                 Prefer immediate chat? Connect directly with our founder and tech leads on WhatsApp or email.
@@ -186,7 +186,7 @@ export default function ContactForm() {
                   <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
                     <button
                       onClick={handleSendToWhatsApp}
-                      className="inline-flex items-center justify-center space-x-2 rounded-full bg-[#00DF81] px-6 py-3.5 text-sm font-bold text-[#05080A] hover:bg-[#00F58D] transition-colors"
+                      className="inline-flex items-center justify-center space-x-2 rounded-full bg-[#00DF81] px-6 py-3.5 text-sm font-bold text-[#05080A] hover:bg-[#00F58D] transition-colors cursor-pointer"
                     >
                       <MessageSquare className="h-4 w-4" />
                       <span>Forward Instantly to WhatsApp</span>
@@ -194,7 +194,7 @@ export default function ContactForm() {
 
                     <button
                       onClick={() => setSubmitted(false)}
-                      className="rounded-full border border-white/10 px-5 py-3 text-xs font-semibold text-gray-400 hover:bg-white/5"
+                      className="rounded-full border border-white/10 px-5 py-3 text-xs font-semibold text-gray-400 hover:bg-white/5 cursor-pointer"
                     >
                       Send Another Request
                     </button>
@@ -294,7 +294,7 @@ export default function ContactForm() {
                           type="button"
                           key={b}
                           onClick={() => setFormData({ ...formData, budget: b })}
-                          className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-all ${
+                          className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-all cursor-pointer ${
                             formData.budget === b
                               ? 'bg-[#00DF81] text-[#05080A] font-bold'
                               : 'border border-white/[0.08] bg-white/[0.03] text-gray-300 hover:bg-white/[0.06]'
@@ -319,6 +319,13 @@ export default function ContactForm() {
                       className="w-full rounded-xl border border-white/[0.08] bg-white/[0.03] p-4 text-xs text-white placeholder-gray-500 focus:border-[#00DF81] focus:outline-none focus:ring-1 focus:ring-[#00DF81]"
                     />
                   </div>
+
+                  {error && (
+                    <div className="flex items-center space-x-2.5 rounded-xl border border-red-500/20 bg-red-500/10 p-3.5 text-xs text-red-400">
+                      <AlertCircle className="h-4 w-4 shrink-0 text-red-400" />
+                      <span>{error}</span>
+                    </div>
+                  )}
 
                   {/* Submit Button */}
                   <button

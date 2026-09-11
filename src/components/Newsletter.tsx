@@ -48,7 +48,7 @@ export default function Newsletter() {
             {/* Tag */}
             <div className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
               <Sparkles className="h-3.5 w-3.5" />
-              <span>// ENGINEERING &amp; GROWTH DISPATCH</span>
+              <span>{'// ENGINEERING & GROWTH DISPATCH'}</span>
             </div>
 
             {/* Heading */}

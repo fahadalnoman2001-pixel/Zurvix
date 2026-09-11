@@ -6,7 +6,6 @@ import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
 import WhatsAppModal from '@/components/WhatsAppModal';
 import ContactForm from '@/components/ContactForm';
-import { Sparkles, MessageSquare, Mail, Phone, ShieldCheck, Clock, CheckCircle2 } from 'lucide-react';
 
 export default function ContactPage() {
   const [isSalesModalOpen, setIsSalesModalOpen] = useState(false);
@@ -23,7 +22,7 @@ export default function ContactPage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6">
           <div className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
-            <span>// START A PROJECT</span>
+            <span>{'// START A PROJECT'}</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight max-w-4xl mx-auto leading-tight">

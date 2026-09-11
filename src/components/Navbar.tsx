@@ -131,7 +131,7 @@ export default function Navbar({ onOpenSalesModal }: NavbarProps) {
         <div className="fixed inset-0 z-40 bg-[#05080A]/95 backdrop-blur-2xl flex flex-col justify-between p-6 pt-24 sm:hidden animate-in fade-in duration-200">
           <div className="space-y-4">
             <p className="text-xs font-mono uppercase tracking-widest text-[#00DF81]">
-              // NAVIGATION
+              {'// NAVIGATION'}
             </p>
             <nav className="flex flex-col space-y-2">
               {navLinks.map((link) => {

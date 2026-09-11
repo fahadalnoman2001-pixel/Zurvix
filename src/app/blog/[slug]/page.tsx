@@ -5,15 +5,11 @@ import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
-import { blogPosts, BlogPost } from '@/data/blogPosts';
-import { Clock, Calendar, ArrowLeft, ArrowRight, CheckCircle2, MessageSquare, Sparkles, Share2 } from 'lucide-react';
+import { fetchBlogBySlug, fetchBlogs, getImageUrl, getBlogCoverImage } from '@/lib/api';
+import { Clock, ArrowLeft, ArrowRight, MessageSquare } from 'lucide-react';
 import type { Metadata } from 'next';
 
-export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }));
-}
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({
   params,
@@ -21,28 +17,54 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const resolvedParams = await params;
-  const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
+  const apiBlog = await fetchBlogBySlug(resolvedParams.slug, 'zurvix');
 
-  if (!post) {
+  if (!apiBlog) {
     return {
       title: 'Article Not Found | ZURVIX',
     };
   }
 
+  const title = apiBlog.seo_title || apiBlog.title;
+  const description = apiBlog.seo_description || apiBlog.excerpt || '';
+  const keywords = apiBlog.seo_keywords
+    ? apiBlog.seo_keywords.split(',').map((k) => k.trim())
+    : ['digital agency', 'technology insights', 'zurvix'];
+
+  const imageUrl = apiBlog.og_image
+    ? getImageUrl(apiBlog.og_image)
+    : apiBlog.featured_image
+    ? getImageUrl(apiBlog.featured_image)
+    : '/og-image.png';
+
+  const canonicalUrl = `https://zurvix.com/blog/${resolvedParams.slug}`;
+
   return {
-    title: `${post.title} | ZURVIX Insights`,
-    description: post.excerpt,
+    title: `${title} | ZURVIX Insights`,
+    description,
+    keywords,
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
+      title: `${title} | ZURVIX`,
+      description,
+      url: canonicalUrl,
+      type: 'article',
       images: [
         {
-          url: post.coverImage,
+          url: imageUrl,
           width: 1200,
           height: 630,
-          alt: post.title,
+          alt: title,
         },
       ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [imageUrl],
+    },
+    alternates: {
+      canonical: canonicalUrl,
     },
   };
 }
@@ -53,22 +75,95 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const resolvedParams = await params;
-  const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
+  const apiBlog = await fetchBlogBySlug(resolvedParams.slug, 'zurvix');
 
-  if (!post) {
+  if (!apiBlog) {
     notFound();
   }
 
-  const relatedPosts = blogPosts.filter((p) => p.id !== post.id).slice(0, 2);
+  // Determine post details
+  const title = apiBlog.title || '';
+  const subtitle = apiBlog.excerpt || '';
+  const categoryName = apiBlog.category?.name || 'Insights';
+  const categorySlug = apiBlog.category?.slug || 'all';
+  const readTime = apiBlog.read_time ? `${apiBlog.read_time} min read` : '6 min read';
+  const publishDate = apiBlog.published_at
+    ? new Date(apiBlog.published_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+    : '2026';
+  const authorName = apiBlog.author || 'Zurvix Team';
+  const authorRole = 'Principal Technologist & Architect';
+  const authorInitials = authorName.split(' ').map((n: string) => n[0]).join('').slice(0, 2).toUpperCase() || 'ZX';
+  const coverImage = getBlogCoverImage(apiBlog.featured_image, categorySlug, null);
 
+  // Schema Markup JSON-LD
+  const schemaJson = apiBlog.schema_markup || JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description: subtitle,
+    image: [coverImage],
+    datePublished: apiBlog.published_at || new Date().toISOString(),
+    author: {
+      '@type': 'Person',
+      name: authorName,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'ZURVIX',
+      url: 'https://zurvix.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://zurvix.com/logo.png',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://zurvix.com/blog/${resolvedParams.slug}`,
+    },
+  });
+
+  // WhatsApp inquiry URL
   const whatsappInquiryUrl = `https://wa.me/35699784477?text=${encodeURIComponent(
-    `Hello ZURVIX, I just read your article "${post.title}" and would like to discuss implementing these strategies for my business.`
+    `Hello ZURVIX, I just read your article "${title}" and would like to discuss implementing these strategies for my business.`
   )}`;
+
+  // Related posts: dynamically fetch from API
+  let relatedPosts: Array<{
+    id: string;
+    slug: string;
+    category: string;
+    title: string;
+    excerpt: string;
+    coverImage: string;
+  }> = [];
+
+  try {
+    const allApiBlogs = await fetchBlogs({ source: 'zurvix', limit: 8 });
+    relatedPosts = allApiBlogs
+      .filter((b) => b.slug !== resolvedParams.slug)
+      .slice(0, 2)
+      .map((b) => ({
+        id: String(b.id),
+        slug: b.slug,
+        category: b.category?.name || 'Insights',
+        title: b.title,
+        excerpt: b.excerpt,
+        coverImage: getBlogCoverImage(b.featured_image, b.category?.slug, null),
+      }));
+  } catch {
+    relatedPosts = [];
+  }
 
   return (
     <main className="min-h-screen bg-[#05080A] text-white">
       <CustomCursor />
       <Navbar />
+
+      {/* JSON-LD Structured Data for AI Search & Google */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: schemaJson }}
+      />
 
       {/* Article Hero */}
       <article className="pt-32 pb-24 relative overflow-hidden bg-[#05080A]">
@@ -88,113 +183,81 @@ export default async function BlogPostPage({
           {/* Meta & Category */}
           <div className="space-y-4">
             <div className="flex flex-wrap items-center gap-3 text-xs text-gray-400 font-mono">
-              <span className="rounded-full bg-[#00DF81]/15 border border-[#00DF81]/30 px-3 py-1 text-xs font-semibold text-[#00DF81]">
-                {post.category}
-              </span>
+              <Link
+                href={`/blog?category=${categorySlug}`}
+                className="rounded-full bg-[#00DF81]/15 border border-[#00DF81]/30 px-3 py-1 text-xs font-semibold text-[#00DF81] hover:bg-[#00DF81]/25 transition-colors"
+              >
+                {categoryName}
+              </Link>
               <span>•</span>
               <div className="flex items-center space-x-1">
-                <Clock className="h-3.5 w-3.5" />
-                <span>{post.readingTime}</span>
+                <Clock className="h-3.5 w-3.5 text-[#00DF81]" />
+                <span>{readTime}</span>
               </div>
               <span>•</span>
-              <span>Published {post.publishDate}</span>
+              <span>Published {publishDate}</span>
             </div>
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-              {post.title}
+              {title}
             </h1>
 
-            <p className="text-base sm:text-lg text-gray-300 leading-relaxed font-normal">
-              {post.subtitle}
-            </p>
+            {subtitle && (
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed font-normal">
+                {subtitle}
+              </p>
+            )}
 
             {/* Author Profile Bar */}
             <div className="flex items-center space-x-3 pt-4 border-t border-white/[0.08]">
               <div className="h-10 w-10 rounded-full bg-[#00DF81] text-black font-extrabold text-sm flex items-center justify-center">
-                {post.author.avatarInitials}
+                {authorInitials}
               </div>
               <div>
-                <p className="text-sm font-bold text-white">{post.author.name}</p>
-                <p className="text-xs text-gray-400 font-mono">{post.author.role}</p>
+                <p className="text-sm font-bold text-white">{authorName}</p>
+                <p className="text-xs text-gray-400 font-mono">{authorRole}</p>
               </div>
             </div>
           </div>
 
           {/* Hero Image */}
-          <div className="relative h-[280px] sm:h-[450px] w-full rounded-3xl overflow-hidden border border-white/[0.08] shadow-2xl">
+          <div className="relative h-[280px] sm:h-[450px] w-full rounded-3xl overflow-hidden border border-white/[0.08] shadow-2xl bg-[#06090E]">
             <Image
-              src={post.coverImage}
-              alt={post.title}
+              src={coverImage}
+              alt={title}
               fill
               priority
               className="object-cover"
             />
           </div>
 
-          {/* Table of Contents Box */}
-          <div className="rounded-3xl border border-white/[0.08] bg-[#080C11] p-6 sm:p-8">
-            <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-[#00DF81] mb-4">
-              // ARTICLE CONTENTS &amp; KEY SECTIONS
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-gray-300">
-              {post.tableOfContents.map((toc) => (
-                <a
-                  key={toc.id}
-                  href={`#${toc.id}`}
-                  className="hover:text-[#00DF81] transition-colors py-1 flex items-center space-x-2"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#00DF81]" />
-                  <span>{toc.title}</span>
-                </a>
-              ))}
-            </div>
-          </div>
-
           {/* Article Main Body */}
-          <div className="space-y-12 text-gray-300 text-sm sm:text-base leading-relaxed pt-6">
-            {post.sections.map((sec) => (
-              <section key={sec.id} id={sec.id} className="space-y-4 scroll-mt-28">
-                <h2 className="text-2xl font-bold text-white tracking-tight border-b border-white/[0.06] pb-2">
-                  {sec.heading}
-                </h2>
-
-                <p className="text-gray-300 leading-relaxed">
-                  {sec.content}
-                </p>
-
-                {sec.highlight && (
-                  <blockquote className="rounded-2xl border-l-4 border-[#00DF81] bg-[#00DF81]/5 p-5 text-sm sm:text-base text-emerald-200 font-medium italic my-4">
-                    {sec.highlight}
-                  </blockquote>
-                )}
-
-                {sec.subpoints && (
-                  <div className="space-y-2.5 pt-2">
-                    {sec.subpoints.map((pt, pIdx) => (
-                      <div key={pIdx} className="flex items-start space-x-3 text-xs sm:text-sm text-gray-300">
-                        <CheckCircle2 className="h-4 w-4 text-[#00DF81] shrink-0 mt-0.5" />
-                        <span>{pt}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </section>
-            ))}
-          </div>
+          {apiBlog.content && (
+            <div
+              className="prose prose-invert prose-emerald max-w-none text-gray-300 text-sm sm:text-base leading-relaxed pt-6
+                prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight
+                prose-h2:text-2xl prose-h2:border-b prose-h2:border-white/[0.06] prose-h2:pb-2 prose-h2:mt-10
+                prose-h3:text-xl prose-h3:mt-8
+                prose-blockquote:border-l-4 prose-blockquote:border-[#00DF81] prose-blockquote:bg-[#00DF81]/5 prose-blockquote:rounded-r-2xl prose-blockquote:p-4 prose-blockquote:text-emerald-200
+                prose-code:text-[#00DF81] prose-code:bg-white/[0.05] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+                prose-li:text-gray-300 prose-ul:my-4"
+              dangerouslySetInnerHTML={{ __html: apiBlog.content }}
+            />
+          )}
 
           {/* Bottom Call to Action Banner */}
           <div className="mt-16 rounded-3xl border border-white/[0.1] bg-gradient-to-r from-[#080C11] via-[#0A0F16] to-[#080C11] p-8 sm:p-12 text-center space-y-6 shadow-2xl">
             <span className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
-              <span>// GROWTH STRATEGY</span>
+              <span>{'// DIRECT GROWTH STRATEGY'}</span>
             </span>
 
             <h3 className="text-2xl sm:text-3xl font-extrabold text-white max-w-xl mx-auto">
-              {post.ctaText || 'Ready to implement these technical standards in your business?'}
+              Ready to implement these technical standards in your business?
             </h3>
 
             <p className="text-xs sm:text-sm text-gray-400 max-w-lg mx-auto">
-              Connect directly with our engineering and growth team on WhatsApp for a complimentary roadmap session.
+              Connect directly with our senior engineering and growth architect on WhatsApp for an immediate consultation.
             </p>
 
             <div className="pt-2">
@@ -223,23 +286,34 @@ export default async function BlogPostPage({
                   <Link
                     key={rel.id}
                     href={`/blog/${rel.slug}`}
-                    className="rounded-3xl border border-white/[0.08] bg-[#080C11] p-6 space-y-3 transition-all hover:border-[#00DF81]/40 hover:bg-[#0A0F16] group"
+                    className="rounded-3xl border border-white/[0.08] bg-[#080C11] overflow-hidden transition-all hover:border-[#00DF81]/40 hover:bg-[#0A0F16] group flex flex-col justify-between"
                   >
-                    <span className="text-[10px] font-mono font-semibold text-[#00DF81] uppercase tracking-wider">
-                      {rel.category}
-                    </span>
-                    <h4 className="text-base font-bold text-white group-hover:text-[#00DF81] transition-colors leading-snug">
-                      {rel.title}
-                    </h4>
-                    <p className="text-xs text-gray-400 line-clamp-2">
-                      {rel.excerpt}
-                    </p>
+                    <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0D131A]">
+                      <Image
+                        src={rel.coverImage}
+                        alt={rel.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute top-3 left-3">
+                        <span className="rounded-full bg-black/80 backdrop-blur-md border border-white/10 px-2.5 py-0.5 text-[10px] font-mono font-semibold text-[#00DF81]">
+                          {rel.category}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-6 space-y-2">
+                      <h4 className="text-base font-bold text-white group-hover:text-[#00DF81] transition-colors leading-snug line-clamp-2">
+                        {rel.title}
+                      </h4>
+                      <p className="text-xs text-gray-400 line-clamp-2">
+                        {rel.excerpt}
+                      </p>
+                    </div>
                   </Link>
                 ))}
               </div>
             </div>
           )}
-
         </div>
       </article>
 

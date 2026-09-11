@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { X, MessageSquare, ArrowRight, ShieldCheck, Zap, Clock, CheckCircle2 } from 'lucide-react';
+import { X, MessageSquare, ArrowRight, ShieldCheck, Zap, Clock } from 'lucide-react';
 import { PricingPackage } from '@/data/packages';
 
 interface WhatsAppModalProps {
@@ -18,7 +18,6 @@ export default function WhatsAppModal({ isOpen, onClose, selectedPackage }: What
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-      setCustomNote('');
     } else {
       document.body.style.overflow = 'auto';
     }
@@ -29,9 +28,14 @@ export default function WhatsAppModal({ isOpen, onClose, selectedPackage }: What
 
   if (!isOpen) return null;
 
+  const handleClose = () => {
+    setCustomNote('');
+    onClose();
+  };
+
   const defaultMsg = selectedPackage
     ? selectedPackage.whatsAppMessage
-    : "Hello ZURVIX, I would like to discuss a custom digital project for my business.";
+    : 'Hello ZURVIX, I would like to discuss a custom digital project for my business.';
 
   const finalMessage = customNote
     ? `${defaultMsg}\n\nAdditional Details: ${customNote}`
@@ -41,7 +45,7 @@ export default function WhatsAppModal({ isOpen, onClose, selectedPackage }: What
     const encoded = encodeURIComponent(finalMessage);
     const url = `https://wa.me/35699784477?text=${encoded}`;
     window.open(url, '_blank', 'noopener,noreferrer');
-    onClose();
+    handleClose();
   };
 
   const handleCopy = () => {
@@ -55,7 +59,7 @@ export default function WhatsAppModal({ isOpen, onClose, selectedPackage }: What
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/80 backdrop-blur-md transition-opacity"
-        onClick={onClose}
+        onClick={handleClose}
       />
 
       {/* Modal Card */}
@@ -80,7 +84,7 @@ export default function WhatsAppModal({ isOpen, onClose, selectedPackage }: What
           </div>
 
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="rounded-lg p-1.5 text-gray-400 hover:bg-white/10 hover:text-white transition-colors"
             aria-label="Close modal"
           >
@@ -126,7 +130,7 @@ export default function WhatsAppModal({ isOpen, onClose, selectedPackage }: What
               <button
                 type="button"
                 onClick={handleCopy}
-                className="text-xs text-[#00DF81] hover:underline"
+                className="text-xs text-[#00DF81] hover:underline cursor-pointer"
               >
                 {copied ? 'Copied to clipboard!' : 'Copy message'}
               </button>
@@ -181,8 +185,8 @@ export default function WhatsAppModal({ isOpen, onClose, selectedPackage }: What
             <ArrowRight className="h-4 w-4" />
           </button>
           <button
-            onClick={onClose}
-            className="rounded-xl border border-white/10 px-4 py-3 text-xs font-semibold text-gray-400 hover:bg-white/5 hover:text-white transition-colors"
+            onClick={handleClose}
+            className="rounded-xl border border-white/10 px-4 py-3 text-xs font-semibold text-gray-400 hover:bg-white/5 hover:text-white transition-colors cursor-pointer"
           >
             Cancel
           </button>

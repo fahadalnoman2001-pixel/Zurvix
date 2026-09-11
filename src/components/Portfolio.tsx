@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { portfolioProjects, Project } from '@/data/projects';
-import { Sparkles, ArrowRight, CheckCircle2, X, Info } from 'lucide-react';
+import { ArrowRight, CheckCircle2, X, Info } from 'lucide-react';
 
 interface PortfolioProps {
   onOpenProjectInquiry: (projectName: string) => void;
@@ -28,7 +28,7 @@ export default function Portfolio({ onOpenProjectInquiry }: PortfolioProps) {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
           <div className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
-            <span>// 01 — FEATURED WORK</span>
+            <span>{'// 01 — FEATURED WORK'}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">

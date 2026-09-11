@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Award, Code2, Globe2, ShieldCheck, Sparkles, Smartphone, BarChart3, Clock } from 'lucide-react';
+import { Award, Code2, Globe2, Smartphone, BarChart3, Clock } from 'lucide-react';
 
 export default function TrustBar() {
   const highlights = [

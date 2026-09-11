@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MessageSquare, Mail, ArrowUp, X, Check } from 'lucide-react';
+import { MessageSquare, Mail, ArrowUp, X } from 'lucide-react';
 import SocialLinks from './SocialLinks';
 
 export default function Footer() {
@@ -24,29 +24,25 @@ export default function Footer() {
             
             {/* Brand Column */}
             <div className="lg:col-span-4 space-y-4">
-              <Link href="/" className="inline-block">
-                <div className="relative h-8 sm:h-9 w-32 sm:w-36">
-                  <Image
-                    src="/brand/zurvix-dark-mode.png"
-                    alt="ZURVIX"
-                    fill
-                    className="object-contain"
-                  />
+              <div className="relative h-7 w-28">
+                <Image
+                  src="/brand/zurvix-dark-mode.png"
+                  alt="ZURVIX"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <p className="text-gray-400 text-xs leading-relaxed max-w-sm">
+                Engineering modern digital products, scalable web platforms, native mobile apps, and Generative Engine Optimization (GEO).
+              </p>
+              
+              <div className="space-y-1.5 pt-1">
+                <div className="flex items-center space-x-2 text-[11px] text-gray-400 font-mono">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#00DF81]" />
+                  <span>Founder: <strong className="text-white">Fahad Al Noman</strong> (7+ Yrs Exp)</span>
                 </div>
-              </Link>
-
-              <p className="text-sm font-semibold text-white">
-                Design. Development. Growth.
-              </p>
-
-              <p className="text-xs text-gray-400 leading-relaxed max-w-sm">
-                Digital products, websites, apps and growth systems engineered for visionary modern businesses.
-              </p>
-
-              <div className="pt-2 text-xs text-gray-400 font-mono space-y-1">
-                <p>Founder: <span className="text-gray-200 font-semibold">Fahad Al Noman</span> (7+ Yrs Exp)</p>
-                <div className="inline-flex items-center space-x-1.5 rounded-full bg-[#00DF81]/10 border border-[#00DF81]/25 px-2.5 py-0.5 text-[11px] text-[#00DF81]">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#00DF81] animate-pulse" />
+                <div className="flex items-center space-x-2 text-[11px] text-gray-400 font-mono">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#00DF81]" />
                   <span>Official Domain: zurvix.com</span>
                 </div>
               </div>
@@ -57,7 +53,7 @@ export default function Footer() {
               {/* Navigation */}
               <div className="space-y-3">
                 <p className="text-xs font-mono uppercase tracking-wider text-white">
-                  // Navigation
+                  {'// Navigation'}
                 </p>
                 <ul className="space-y-2.5 text-xs">
                   {[
@@ -67,6 +63,7 @@ export default function Footer() {
                     { name: 'Pricing', href: '/pricing' },
                     { name: 'About Us', href: '/about' },
                     { name: 'Blog & Guides', href: '/blog' },
+                    { name: 'FAQ', href: '/faq' },
                     { name: 'Contact', href: '/contact' },
                   ].map((item) => (
                     <li key={item.name}>
@@ -84,7 +81,7 @@ export default function Footer() {
               {/* Capabilities */}
               <div className="space-y-3">
                 <p className="text-xs font-mono uppercase tracking-wider text-white">
-                  // Capabilities
+                  {'// Capabilities'}
                 </p>
                 <ul className="space-y-2.5 text-xs">
                   {[
@@ -109,7 +106,7 @@ export default function Footer() {
             {/* Direct Connect Column */}
             <div className="lg:col-span-3 space-y-4">
               <p className="text-xs font-mono uppercase tracking-wider text-white">
-                // Direct Connect
+                {'// Direct Connect'}
               </p>
               
               <div className="space-y-2.5">

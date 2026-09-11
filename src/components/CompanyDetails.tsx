@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import { ExternalLink, Quote, Check, ArrowRight, ShieldCheck, Zap, Sparkles } from 'lucide-react';
+import { ExternalLink, Quote, Check } from 'lucide-react';
 
 export default function CompanyDetails() {
   const metrics = [
@@ -34,7 +33,7 @@ export default function CompanyDetails() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
-            <span>// 03 — COMPANY DETAILS</span>
+            <span>{'// 03 — COMPANY DETAILS'}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
@@ -74,7 +73,7 @@ export default function CompanyDetails() {
           <div className="w-[85vw] sm:w-[70vw] lg:w-auto shrink-0 snap-center lg:col-span-6 rounded-3xl border border-white/[0.08] bg-[#080C11] p-7 sm:p-10 flex flex-col justify-between">
             <div className="space-y-5">
               <span className="text-xs font-mono uppercase tracking-widest text-[#00DF81]">
-                // ABOUT ZURVIX
+                {'// ABOUT ZURVIX'}
               </span>
               <h3 className="text-2xl font-bold text-white tracking-tight">
                 We unite strategy, engineering, and digital visibility.
@@ -97,7 +96,7 @@ export default function CompanyDetails() {
           <div className="w-[85vw] sm:w-[70vw] lg:w-auto shrink-0 snap-center lg:col-span-6 rounded-3xl border border-white/[0.08] bg-[#080C11] p-7 sm:p-10 flex flex-col justify-between">
             <div className="space-y-6">
               <span className="text-xs font-mono uppercase tracking-widest text-[#00DF81]">
-                // OUR CORE PHILOSOPHY
+                {'// OUR CORE PHILOSOPHY'}
               </span>
               <div className="space-y-5">
                 {pillars.map((p, idx) => (

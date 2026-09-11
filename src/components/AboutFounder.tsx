@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import { Sparkles, ArrowRight, ExternalLink, Quote, Award, Terminal, Compass, CheckCircle2 } from 'lucide-react';
+import { ExternalLink, Quote, CheckCircle2 } from 'lucide-react';
 import SocialLinks from './SocialLinks';
 
 export default function AboutFounder() {
@@ -18,7 +17,7 @@ export default function AboutFounder() {
           
           <div className="lg:col-span-6 space-y-6">
             <div className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
-              <span>// 01 — ABOUT ZURVIX</span>
+              <span>{'// 01 — ABOUT ZURVIX'}</span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
@@ -57,7 +56,7 @@ export default function AboutFounder() {
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#00DF81]/10 rounded-full blur-3xl pointer-events-none" />
 
               <h3 className="text-xs font-mono uppercase font-bold tracking-widest text-[#00DF81] mb-6">
-                // THE ZURVIX ETHOS
+                {'// THE ZURVIX ETHOS'}
               </h3>
 
               <div className="space-y-5 text-xs sm:text-sm text-gray-300">
@@ -107,7 +106,7 @@ export default function AboutFounder() {
 
           <div className="relative z-10 space-y-6">
             <span className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
-              <span>// FOUNDER PERSPECTIVE</span>
+              <span>{'// FOUNDER PERSPECTIVE'}</span>
             </span>
 
             {/* Editorial Quote */}
@@ -134,7 +133,7 @@ export default function AboutFounder() {
                 href="https://fahadalnoman.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-xs font-bold text-white hover:bg-white/10 hover:border-[#00DF81] transition-all duration-200 group"
+                className="inline-flex items-center space-x-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-xs font-bold text-white hover:bg-white/10 hover:border-[#00DF81] transition-all duration-200 group cursor-pointer"
               >
                 <span>Visit fahadalnoman.com</span>
                 <ExternalLink className="h-3.5 w-3.5 text-[#00DF81] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

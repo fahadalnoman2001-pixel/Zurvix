@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Target, Cpu, Layers, TrendingUp, CheckCircle, ShieldCheck, Sparkles } from 'lucide-react';
+import { Target, Cpu, Layers, TrendingUp } from 'lucide-react';
 
 export default function WhyZurvix() {
   const stats = [
@@ -44,7 +44,7 @@ export default function WhyZurvix() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
-            <span>// 02 — WHY ZURVIX</span>
+            <span>{'// 02 — WHY ZURVIX'}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">

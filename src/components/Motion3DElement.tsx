@@ -13,7 +13,6 @@ export default function Motion3DElement() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
-  const [shapeMode, setShapeMode] = useState<'icosahedron' | 'torus' | 'cube'>('icosahedron');
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -90,7 +89,7 @@ export default function Motion3DElement() {
     let rotZ = 0.1;
     let targetRotX = 0.4;
     let targetRotY = 0.6;
-    let speedMultiplier = 1;
+    const speedMultiplier = 1;
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
@@ -113,19 +112,19 @@ export default function Motion3DElement() {
       // 3D rotation projection helper
       const project = (p: Point3D): { x: number; y: number; z: number; scale: number } => {
         // Rotate Y
-        let x1 = p.x * Math.cos(rotY) + p.z * Math.sin(rotY);
-        let y1 = p.y;
-        let z1 = -p.x * Math.sin(rotY) + p.z * Math.cos(rotY);
+        const x1 = p.x * Math.cos(rotY) + p.z * Math.sin(rotY);
+        const y1 = p.y;
+        const z1 = -p.x * Math.sin(rotY) + p.z * Math.cos(rotY);
 
         // Rotate X
-        let x2 = x1;
-        let y2 = y1 * Math.cos(rotX) - z1 * Math.sin(rotX);
-        let z2 = y1 * Math.sin(rotX) + z1 * Math.cos(rotX);
+        const x2 = x1;
+        const y2 = y1 * Math.cos(rotX) - z1 * Math.sin(rotX);
+        const z2 = y1 * Math.sin(rotX) + z1 * Math.cos(rotX);
 
         // Rotate Z
-        let x3 = x2 * Math.cos(rotZ) - y2 * Math.sin(rotZ);
-        let y3 = x2 * Math.sin(rotZ) + y2 * Math.cos(rotZ);
-        let z3 = z2;
+        const x3 = x2 * Math.cos(rotZ) - y2 * Math.sin(rotZ);
+        const y3 = x2 * Math.sin(rotZ) + y2 * Math.cos(rotZ);
+        const z3 = z2;
 
         const distance = 300;
         const scale = fov / (fov + z3 + distance);

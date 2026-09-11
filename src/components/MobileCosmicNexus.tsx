@@ -269,7 +269,7 @@ export default function MobileCosmicNexus({ filterCategory = 'all', onSelectPlan
       }
 
       // 4. Planets & Orbit Tracks
-      planetsRef.current.forEach((planet, idx) => {
+      planetsRef.current.forEach((planet) => {
         planet.angle += planet.speed;
 
         const effectiveOrbitA = planet.orbitA * scale;

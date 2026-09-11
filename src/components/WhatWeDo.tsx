@@ -85,7 +85,7 @@ export default function WhatWeDo({ onSelectService }: WhatWeDoProps) {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
-              <span>// 01 — WHAT WE DO</span>
+              <span>{'// 01 — WHAT WE DO'}</span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
               End-to-end capabilities.{' '}

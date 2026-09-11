@@ -8,7 +8,7 @@ import CustomCursor from '@/components/CustomCursor';
 import WhatsAppModal from '@/components/WhatsAppModal';
 import Portfolio from '@/components/Portfolio';
 import { PricingPackage } from '@/data/packages';
-import { Sparkles, ArrowRight, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function PortfolioPage() {
   const [isSalesModalOpen, setIsSalesModalOpen] = useState(false);
@@ -39,7 +39,7 @@ export default function PortfolioPage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6">
           <div className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
-            <span>// CASE STUDIES &amp; DELIVERED WORK</span>
+            <span>{'// CASE STUDIES & DELIVERED WORK'}</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight max-w-4xl mx-auto leading-tight">
@@ -59,7 +59,7 @@ export default function PortfolioPage() {
       <section className="py-24 bg-[#05080A] border-t border-white/[0.06]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <div className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
-            <span>// LET&apos;S COLLABORATE</span>
+            <span>{"// LET'S COLLABORATE"}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
@@ -78,9 +78,9 @@ export default function PortfolioPage() {
             </Link>
             <Link
               href="/pricing"
-              className="inline-flex items-center space-x-2 rounded-full border border-white/15 bg-white/[0.03] px-7 py-4 text-xs sm:text-sm font-semibold text-white hover:bg-white/10 hover:border-white/30 transition-all"
+              className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-8 py-4 text-xs sm:text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition-all"
             >
-              <span>View Packages &amp; Pricing</span>
+              <span>View Transparent Pricing</span>
             </Link>
           </div>
         </div>

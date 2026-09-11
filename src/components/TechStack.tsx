@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { techStackData, platformEcosystem } from '@/data/techStack';
 import { getPlatformIcon } from '@/components/PlatformIcons';
-import { Sparkles, Code2, Server, Database, Smartphone, ShoppingBag, Cloud, Bot, Video, CheckCircle2 } from 'lucide-react';
 
 export default function TechStack() {
   const [activeCategory, setActiveCategory] = useState<string>('All');
@@ -34,7 +33,7 @@ export default function TechStack() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
           <div className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
-            <span>// 03 — MODERN STACK &amp; ECOSYSTEM</span>
+            <span>{'// 03 — MODERN STACK & ECOSYSTEM'}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">

@@ -68,7 +68,7 @@ export default function HomePage() {
       <section className="py-24 relative overflow-hidden bg-[#05080A] border-t border-white/[0.06]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10">
           <div className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono font-medium text-[#00DF81]">
-            <span>// LET&apos;S CONNECT</span>
+            <span>{"// LET'S CONNECT"}</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
